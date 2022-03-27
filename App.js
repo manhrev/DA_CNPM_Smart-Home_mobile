@@ -5,7 +5,6 @@ export default function App() {
     <NavigationContainer>
       <Navigator/>
     </NavigationContainer>
-    
   );
 }
 

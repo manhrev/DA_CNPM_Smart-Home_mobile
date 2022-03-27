@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function Home({navigation}) {
+export default function Home({navigation, route}) {
   const goToReViewHandler = () => {
     navigation.navigate('ReviewDetails')
   }
   return (
     <View style={styles.container}>
-      <Text>Home screen</Text>
+      <Text>{route.name}</Text>
       <StatusBar style="auto" />
       <Button title="Go to review" onPress={goToReViewHandler}/>
     </View>

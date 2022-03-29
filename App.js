@@ -2,7 +2,7 @@ import Navigator from './routes/drawer'
 import React from 'react'
 import { AuthContext } from './AuthContext'
 import axios from 'axios';
-import { AsyncStorage } from 'react-native'
+
 
 
 
@@ -19,11 +19,30 @@ const reducer = (state, action) => {
 }
 
 export default function App() {
-  // const Context = React.useContext(AuthContext)
-  // React.useEffect(() => {
-  //   checkLogin() 
-  // }, [])
-  // 
+  const Context = React.useContext(AuthContext)
+  React.useEffect(() => {
+    checkLogin() 
+   
+  }, [])
+  
+  const checkLogin = async () => {
+    try {
+      const res = await axios.get('http://192.168.2.6:80/api/checkLogin')
+      if (res.data.loggedIn) {
+        dispatch('login')
+        console.log("logged in")
+        
+      } else {
+        dispatch('logout')
+        console.log("Not logged in")
+       
+      }
+
+    } catch(error) {
+      console.log(error)
+    }
+
+  }
 
   const [login, dispatch] = React.useReducer(reducer, initialState)
   return (

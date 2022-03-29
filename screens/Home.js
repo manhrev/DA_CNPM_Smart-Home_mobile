@@ -1,15 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function Home({navigation, route}) {
-  const goToReViewHandler = () => {
-    navigation.navigate('ReviewDetails')
-  }
+import { StyleSheet, Text, View, Button} from 'react-native';
+import { Appbar } from 'react-native-paper';
+
+export default function Home({navigation}) {
+
   return (
     <View style={styles.container}>
-      <Text>{route.name}</Text>
-      <StatusBar style="auto" />
-      <Button title="Go to review" onPress={goToReViewHandler}/>
+
+      <Appbar.Header style={{ height: 60 }}>
+        <Appbar.Action icon="menu" onPress={()=>navigation.openDrawer()}/>
+        <Appbar.Content title="Home" />
+      </Appbar.Header>
+      
+      <Button 
+        title="Room1" 
+        onPress={()=>{
+          navigation.navigate('Room', {
+            Room: 1 
+          })
+        }} />
+      <Button 
+        title="Room2" 
+        onPress={()=>{
+          navigation.navigate('Room', {
+            Room: 2 
+          })
+        }} />
     </View>
   );
 }
@@ -17,8 +33,5 @@ export default function Home({navigation, route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-
   },
 });

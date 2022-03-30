@@ -3,43 +3,51 @@ import { StyleSheet, Text, View } from 'react-native';
 import { TextInput, Appbar, Button } from 'react-native-paper';
 import React from 'react'
 import axios from 'axios'
-import checkLogin from '../axios/functions'
+import {checkLogin} from '../axios/functions'
 import { AuthContext } from '../AuthContext'
+import {SERVER_URL} from '@env'
 
 export default function AddUser({ route, navigation }) {
-    const Context = React.useContext(AuthContext)
     const [fullName, setFullName] = React.useState("")
     const [userName, setUserName] = React.useState("")
     const [password, setPassword] = React.useState("")
     
     const createUser = async () => {
-        if( checkLogin(Context) ) {
-            try {
-                const res = await axios.post('http://192.168.2.6:80/api/createUser', {
-                    fullName: fullName,
-                    userName: userName,
-                    password: password
-                })
-                // alert("Add user successfully")
-                setFullName('')
-                setUserName('')
-                setPassword('')
+        
+        try {
+            const res = await axios.post(SERVER_URL + '/api/createUser', {
+                fullName: fullName,
+                userName: userName,
+                password: password
+            })
+            alert("Add user successfully")
+            setFullName('')
+            setUserName('')
+            setPassword('')
 
-                navigation.goBack()
-            }
-            catch (error) {
-                console.log(error)
-                alert("Failed!")
-            }
+            navigation.goBack()
+        }
+        catch (error) {
+            console.log(error)
+            alert("Failed!")
         }
         
+        
     }
+
+    const Context = React.useContext(AuthContext)
+    React.useEffect(() => {
+        const willFocusSubscription = navigation.addListener('focus', () => {
+            checkLogin(Context, ()=>{});
+        });
+        return willFocusSubscription;
+    }, [navigation])
 
     return (
         <View style={styles.container}>
 
             <Appbar.Header style={{ height: 60 }}>
-                <Appbar.BackAction onPress={() => navigation.goBack()} />
+                <Appbar.BackAction onPress={() => checkLogin(Context, navigation.goBack)} />
                 <Appbar.Content title="Add user" />
             </Appbar.Header>
 
@@ -70,7 +78,7 @@ export default function AddUser({ route, navigation }) {
                         onChangeText={(text) => { setPassword(text) }}
                     />
                     <View style={{ alignItems: 'center' }}>
-                        <Button onPress={createUser} mode="outlined" style={{ width: 70 }}>Add</Button>
+                        <Button onPress={() => checkLogin(Context, createUser)} mode="outlined" style={{ width: 70 }}>Add</Button>
                     </View>
 
                 </View>

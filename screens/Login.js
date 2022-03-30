@@ -3,40 +3,30 @@ import { AuthContext } from '../AuthContext'
 import React from 'react'
 import { Appbar, TextInput, Button } from 'react-native-paper'
 import axios from 'axios'
+import {SERVER_URL} from '@env'
+import {checkConnection} from '../axios/functions'
 
 export default function Login({navigation}) {
   const Context = React.useContext(AuthContext)
   const [userName, setUserName] = React.useState("")
   const [password, setPassword] = React.useState("")
-  const checkLogin = async () => {
-    try {
-      const res = await axios.get('http://192.168.2.6:80/api/checkLogin')
-      if (res.data.loggedIn) {
-        console.log("logged in")
-      } else {
-        console.log("Not logged in")
+  
+  const login = () => {
+    checkConnection(async () => {
+      try {
+        const res = await axios.post(SERVER_URL+'/api/login', {
+          email: userName,
+          password: password
+        })
+        alert("Login successfully")
+        Context.loginDispatch('login')
+        console.log(res.data)
       }
-
-    } catch {
-      console.log("not changed")
-      return 1
-    }
-
-  }
-  const login = async () => {
-    try {
-      const res = await axios.post('http://192.168.2.6:80/api/login', {
-        email: userName,
-        password: password
-      })
-      alert("Login successfully")
-      Context.loginDispatch('login')
-      console.log(res.data)
-    }
-    catch (error) {
-      alert("Cannot login")
-      console.log(error)
-    }
+      catch (error) {
+        alert("Wrong username or password!")
+        console.log(error)
+      }
+    })
   }
 
 
@@ -70,9 +60,7 @@ export default function Login({navigation}) {
           <View style={{ alignItems: 'center' }}>
             <Button onPress={login} mode="outlined" style={{ width: 90 }}>Login</Button>
           </View>
-          <View style={{ alignItems: 'center' }}>
-            <Button onPress={checkLogin} mode="outlined" style={{ width: 90 }}>Check</Button>
-          </View>
+    
         </View>
       </View>
 

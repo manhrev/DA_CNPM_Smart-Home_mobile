@@ -2,7 +2,7 @@ import Navigator from './routes/drawer'
 import React from 'react'
 import { AuthContext } from './AuthContext'
 import axios from 'axios';
-
+import {SERVER_URL} from '@env'
 
 
 
@@ -27,7 +27,7 @@ export default function App() {
   
   const checkLogin = async () => {
     try {
-      const res = await axios.get('http://192.168.2.6:80/api/checkLogin')
+      const res = await axios.get(SERVER_URL+'/api/checkLogin')
       if (res.data.loggedIn) {
         dispatch('login')
         console.log("logged in")
@@ -52,19 +52,3 @@ export default function App() {
         
   );
 }
-
-// async function checkLogin() {
-//     try {
-//       const res = await axios.get('http://192.168.2.6:80/api/checkLogin')
-//       if (res.data.loggedIn) {
-//         return 1
-//       } else {
-//         return 0
-//       }
-
-//     } catch {
-//       console.log("not changed")
-//       return 1
-//     }
-
-//   }

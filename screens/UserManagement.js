@@ -2,31 +2,34 @@ import { StyleSheet, View, ScrollView } from 'react-native';
 import { Appbar, DataTable, Button, IconButton, Portal, Dialog, Paragraph, Provider } from 'react-native-paper';
 import React from 'react'
 import axios from 'axios';
-import checkLogin from '../axios/functions'
+import {checkLogin} from '../axios/functions'
 import { AuthContext } from '../AuthContext'
+import {SERVER_URL} from '@env'
 
 export default function UserManagement({ navigation, route }) {
-    const Context = React.useContext(AuthContext)
+    
     const [data, setData] = React.useState([])
     const fetchApi = async () => {
-        if( checkLogin(Context) ) {
-            try {
-                const res = await axios.get('http://192.168.2.6:80/api/getAllUser')
-                if (res.data.loggedIn) {
-                    setData(res.data.data)
-                } else {
-                    setData([])
-                }
-            } catch {
-                alert("Can't connect to server!");
-            }
-        }
- 
 
+        try {
+            const res = await axios.get(SERVER_URL + '/api/getAllUser')
+            if (res.data.loggedIn) {
+                setData(res.data.data)
+            } else {
+                setData([])
+            }
+        } catch {
+            alert("Can't connect to server!");
+        }
+        
+ 
+    
     }
+
+    const Context = React.useContext(AuthContext)
     React.useEffect(() => {
         const willFocusSubscription = navigation.addListener('focus', () => {
-            fetchApi();
+            checkLogin(Context, fetchApi);
         });
         return willFocusSubscription;
     }, [navigation])
@@ -37,7 +40,7 @@ export default function UserManagement({ navigation, route }) {
                 <Appbar.Header style={{ height: 60 }}>
                     <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
                     <Appbar.Content title="User Management" />
-                    <Appbar.Action icon="reload" onPress={fetchApi} />
+                    <Appbar.Action icon="reload" onPress={() => checkLogin(Context, fetchApi)} />
                 </Appbar.Header>
 
                 <Button mode="outlined" style={{ height: 40, alignSelf: 'center', marginVertical: 10 }} icon="account-plus"
@@ -63,7 +66,7 @@ export default function UserManagement({ navigation, route }) {
                                 const [userID, setUserID] = React.useState(props.user._id);
                                 const removeUser = async () => {
                                     try {
-                                        const res = await axios.post('http://192.168.2.6:80/api/removeUser', {
+                                        const res = await axios.post(SERVER_URL+'/api/removeUser', {
                                             userID: userID
                                         })
                                         props.setData(data.filter(dat => dat._id != userID))

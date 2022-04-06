@@ -14,19 +14,18 @@ export async function checkLogin(context, cb) {
             alert("Not logged in!")
         }
 
-    } catch {
-        alert("Can't connect to server!")
+    } catch(error) {
+        console.log(error)
+        alert("An error occur")
     }
 }
 
 export async function checkConnection(cb) {
     try {
-        const res = await axios.get(SERVER_URL + '/checkConnection')
-        if (res.data) {
+        const res = await axios.get(SERVER_URL + '/api/checkConnection')
+        if (res) {
             cb()
-        } else {
-            alert("can's connect to server")
-        }
+        } 
 
     } catch {
         alert("Can't connect to server!")

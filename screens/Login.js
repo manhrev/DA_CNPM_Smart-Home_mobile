@@ -20,7 +20,6 @@ export default function Login({navigation}) {
         })
         alert("Login successfully")
         Context.loginDispatch('login')
-        console.log(res.data)
       }
       catch (error) {
         alert("Wrong username or password!")

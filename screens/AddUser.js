@@ -8,20 +8,20 @@ import { AuthContext } from '../AuthContext'
 import {SERVER_URL} from '@env'
 
 export default function AddUser({ route, navigation }) {
-    const [fullName, setFullName] = React.useState("")
     const [userName, setUserName] = React.useState("")
     const [password, setPassword] = React.useState("")
-    
+    const [role, setRole] = React.useState("")
+
     const createUser = async () => {
         
         try {
             const res = await axios.post(SERVER_URL + '/api/createUser', {
-                fullName: fullName,
+                role: role,
                 userName: userName,
                 password: password
             })
             alert("Add user successfully")
-            setFullName('')
+            setRole('')
             setUserName('')
             setPassword('')
 
@@ -60,22 +60,22 @@ export default function AddUser({ route, navigation }) {
                         style={{ height: 40 }}
                         mode="outlined"
                         label="Username"
-                        value={fullName}
-                        onChangeText={(text) => { setFullName(text) }}
-                    />
-                    <TextInput
-                        style={{ height: 40 }}
-                        mode="outlined"
-                        label="Password"
                         value={userName}
                         onChangeText={(text) => { setUserName(text) }}
                     />
                     <TextInput
                         style={{ height: 40 }}
                         mode="outlined"
-                        label="Role"
+                        label="Password"
                         value={password}
                         onChangeText={(text) => { setPassword(text) }}
+                    />
+                    <TextInput
+                        style={{ height: 40 }}
+                        mode="outlined"
+                        label="Role"
+                        value={role}
+                        onChangeText={(text) => { setRole(text) }}
                     />
                     <View style={{ alignItems: 'center' }}>
                         <Button onPress={() => checkLogin(Context, createUser)} mode="outlined" style={{ width: 70 }}>Add</Button>

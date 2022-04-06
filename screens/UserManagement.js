@@ -7,29 +7,22 @@ import { AuthContext } from '../AuthContext'
 import {SERVER_URL} from '@env'
 
 export default function UserManagement({ navigation, route }) {
-    
     const [data, setData] = React.useState([])
-    const fetchApi = async () => {
-
-        try {
-            const res = await axios.get(SERVER_URL + '/api/getAllUser')
-            if (res.data.loggedIn) {
+    const fetchApi = () => {
+        checkLogin(Context, async () => {
+            try {
+                const res = await axios.get(SERVER_URL + '/api/getAllUser')
                 setData(res.data.data)
-            } else {
-                setData([])
-            }
-        } catch {
-            alert("Can't connect to server!");
-        }
-        
- 
-    
+            } catch {
+                alert("Error");
+            }     
+        })
     }
 
     const Context = React.useContext(AuthContext)
     React.useEffect(() => {
         const willFocusSubscription = navigation.addListener('focus', () => {
-            checkLogin(Context, fetchApi);
+            fetchApi()
         });
         return willFocusSubscription;
     }, [navigation])
@@ -40,7 +33,7 @@ export default function UserManagement({ navigation, route }) {
                 <Appbar.Header style={{ height: 60 }}>
                     <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
                     <Appbar.Content title="User Management" />
-                    <Appbar.Action icon="reload" onPress={() => checkLogin(Context, fetchApi)} />
+                    <Appbar.Action icon="reload" onPress={ fetchApi} />
                 </Appbar.Header>
 
                 <Button mode="outlined" style={{ height: 40, alignSelf: 'center', marginVertical: 10 }} icon="account-plus"
@@ -80,9 +73,9 @@ export default function UserManagement({ navigation, route }) {
                                 return (
                                     <View>
                                         <DataTable.Row>
-                                            <DataTable.Cell style={{ flex: 2 }}>{props.user.fullName}</DataTable.Cell>
+                                            <DataTable.Cell style={{ flex: 2 }}>{props.user.userName}</DataTable.Cell>
                                             <DataTable.Cell style={{ flex: 2 }}>{props.user.password}</DataTable.Cell>
-                                            <DataTable.Cell style={{ flex: 1 }}>{props.user.userName}</DataTable.Cell>
+                                            <DataTable.Cell style={{ flex: 1 }}>{props.user.role}</DataTable.Cell>
                                             <DataTable.Cell style={{ flex: 1, justifyContent: "center" }}>
                                                 <IconButton
                                                     icon="delete"

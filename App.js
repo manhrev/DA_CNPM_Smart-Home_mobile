@@ -40,6 +40,7 @@ export default function App() {
 
     } catch(error) {
       console.log(error)
+      alert("An error occur")
     }
 
   }

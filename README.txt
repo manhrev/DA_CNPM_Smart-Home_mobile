@@ -6,3 +6,6 @@
 -- khi kết nối với server: đặt SERVER_URL (trong .env)
 -- dùng navigation.navigate('RouteName', { /* params go here */ }) điều hướng và truyền props
    dùng route.params để lấy props
+
+
+-- có thể tham khảo react-native-paper làm giao diện

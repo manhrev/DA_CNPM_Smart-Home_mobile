@@ -4,18 +4,21 @@ import { Appbar } from 'react-native-paper';
 import React from 'react'
 import  axios from 'axios'
 import {SERVER_URL} from '@env'
+import { checkConnection } from '../axios/functions';
 
 export default function Logout({navigation}) {
   const Context = React.useContext(AuthContext)
-  const logout = async () => {
-    try {
-        const res = await axios.get(SERVER_URL+'/api/logout')
-        Context.loginDispatch('logout')
-        alert("Logout success")
-    }
-    catch (error) {
-        console.log(error.data)
-    }
+  const logout = () => {
+    checkConnection(async () => {
+      try {
+          const res = await axios.get(SERVER_URL+'/api/logout')
+          Context.loginDispatch('logout')
+          alert("Logout success")
+      }
+      catch (error) {
+          console.log(error.data)
+      }
+    })
   }
 
   return (

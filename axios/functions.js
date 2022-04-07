@@ -16,7 +16,7 @@ export async function checkLogin(context, cb) {
 
     } catch(error) {
         console.log(error)
-        alert("An error occur")
+        alert("Can't connect to server!")
     }
 }
 

@@ -30,7 +30,7 @@ export default function App() {
       const res = await axios.get(SERVER_URL+'/api/checkLogin')
       if (res.data.loggedIn) {
         dispatch('login')
-        console.log("logged in")
+        console.log("Logged in")
         
       } else {
         dispatch('logout')
@@ -38,7 +38,7 @@ export default function App() {
        
       }
 
-    } catch(error) {
+    } catch (error) {
       console.log(error)
       alert("An error occur")
     }

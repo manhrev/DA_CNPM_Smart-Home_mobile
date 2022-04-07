@@ -62,7 +62,7 @@ export default function UserManagement({ navigation, route }) {
                                         const res = await axios.post(SERVER_URL+'/api/removeUser', {
                                             userID: userID
                                         })
-                                        props.setData(data.filter(dat => dat._id != userID))
+                                        fetchApi()
                                         alert("Removed!")
                                     }
                                     catch (error) {
@@ -106,7 +106,7 @@ export default function UserManagement({ navigation, route }) {
                                 )
                             }
                             return (
-                                <Row key={user._id} user={user} data={data} setData={setData} />
+                                <Row key={user._id} user={user} />
                             )
 
                         })}

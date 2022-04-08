@@ -2,16 +2,16 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { AuthContext } from '../AuthContext'
 import { Appbar } from 'react-native-paper';
 import React from 'react'
-import  axios from 'axios'
-import {SERVER_URL} from '@env'
+import  axios from '../axios/axios'
 import { checkConnection } from '../axios/functions';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
 
 export default function Logout({navigation}) {
   const Context = React.useContext(AuthContext)
   const logout = () => {
     checkConnection(async () => {
       try {
-          const res = await axios.get(SERVER_URL+'/api/logout')
+          const res = await axios.get('/api/logout')
           Context.loginDispatch('logout')
           alert("Logout success")
       }

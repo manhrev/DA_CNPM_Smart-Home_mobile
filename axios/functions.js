@@ -1,11 +1,10 @@
-import axios from 'axios'
-import {SERVER_URL} from '@env'
-axios.defaults.timeout = 1000;
+import axios from './axios'
+
 
 
 export async function checkLogin(context, cb) {
     try {
-        const res = await axios.get(SERVER_URL + '/api/checkLogin')
+        const res = await axios.get('/api/checkLogin')
         if (res.data.loggedIn) {
             context.loginDispatch('login')
             cb()
@@ -22,12 +21,13 @@ export async function checkLogin(context, cb) {
 
 export async function checkConnection(cb) {
     try {
-        const res = await axios.get(SERVER_URL + '/api/checkConnection')
+        const res = await axios.get('/api/checkConnection')
         if (res) {
             cb()
         } 
 
     } catch {
+        console.log(error)
         alert("Can't connect to server!")
     }
 }

@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Appbar,Button, Portal, Dialog, Paragraph, Provider, Card, Title } from 'react-native-paper';
 import React from 'react'
-import axios from 'axios';
+import axios from '../axios/axios'
 import {checkLogin} from '../axios/functions'
 import { AuthContext } from '../AuthContext'
-import {SERVER_URL} from '@env'
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function Notification({navigation}) {
@@ -14,7 +13,7 @@ export default function Notification({navigation}) {
     const fetchApi = () => {
         checkLogin(Context, async () => {
             try {
-                const res = await axios.get(SERVER_URL + '/api/getAllNotification')
+                const res = await axios.get('/api/getAllNotification')
                 setData(res.data)
             } catch {
                 alert("Error");
@@ -46,8 +45,8 @@ export default function Notification({navigation}) {
         </Appbar.Header>
 
 
-        <ScrollView style={{ flex: 1 }}>
-          <View style={{ width: '95%', alignSelf: "center" }}>
+        <ScrollView style={{ flex: 1, paddingTop: 20 }}>
+          <View style={{ width: '95%', alignSelf: "center"}}>
             
             {data.map((notification) => {
               function Noty(props) {
@@ -58,12 +57,12 @@ export default function Notification({navigation}) {
                 const removeNotification = () => {
                   checkLogin(Context, async () => {
                     try {
-                      const res = await axios.post(SERVER_URL+'/api/removeNotification', {
+                      const res = await axios.post('/api/removeNotification', {
                         notificationID: notyID
                       })
                       if (res.data) {
                         alert("Success!")
-                        // fetchApi()
+                        fetchApi()
                       }
                       else {
                         alert("Failed!")
@@ -85,7 +84,7 @@ export default function Notification({navigation}) {
                         <Paragraph>
                         {notification.content}
                         </Paragraph>
-                        <Button mode="outlined" style={{ alignSelf: 'flex-end', marginTop: 10 }} onPress={ showDialog}>Dismiss</Button>
+                        <Button mode="outlined" style={{ alignSelf: 'flex-end', marginTop: 10 }} onPress={ removeNotification}>Dismiss</Button>
                       </Card.Content>
                     </Card>
                     <View>
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
   },
   card: {
     marginHorizontal: 5,
-    marginTop: 20,
+    marginBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
         width: 0,

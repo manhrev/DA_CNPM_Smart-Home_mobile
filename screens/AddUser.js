@@ -2,10 +2,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { TextInput, Appbar, Button } from 'react-native-paper';
 import React from 'react'
-import axios from 'axios'
+import axios from '../axios/axios'
 import {checkLogin} from '../axios/functions'
 import { AuthContext } from '../AuthContext'
-import {SERVER_URL} from '@env'
+
 
 export default function AddUser({ route, navigation }) {
     const [userName, setUserName] = React.useState("")
@@ -15,7 +15,7 @@ export default function AddUser({ route, navigation }) {
     const createUser = async () => {
         
         try {
-            const res = await axios.post(SERVER_URL + '/api/createUser', {
+            const res = await axios.post('/api/createUser', {
                 role: role,
                 userName: userName,
                 password: password

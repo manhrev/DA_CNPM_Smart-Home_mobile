@@ -1,17 +1,16 @@
 import { StyleSheet, View, ScrollView } from 'react-native';
 import { Appbar, DataTable, Button, IconButton, Portal, Dialog, Paragraph, Provider } from 'react-native-paper';
 import React from 'react'
-import axios from 'axios';
+import axios from '../axios/axios'
 import {checkLogin} from '../axios/functions'
 import { AuthContext } from '../AuthContext'
-import {SERVER_URL} from '@env'
 
 export default function UserManagement({ navigation, route }) {
     const [data, setData] = React.useState([])
     const fetchApi = () => {
         checkLogin(Context, async () => {
             try {
-                const res = await axios.get(SERVER_URL + '/api/getAllUser')
+                const res = await axios.get('/api/getAllUser')
                 setData(res.data.data)
             } catch {
                 alert("Error");
@@ -59,7 +58,7 @@ export default function UserManagement({ navigation, route }) {
                                 const [userID, setUserID] = React.useState(props.user._id);
                                 const removeUser = async () => {
                                     try {
-                                        const res = await axios.post(SERVER_URL+'/api/removeUser', {
+                                        const res = await axios.post('/api/removeUser', {
                                             userID: userID
                                         })
                                         fetchApi()

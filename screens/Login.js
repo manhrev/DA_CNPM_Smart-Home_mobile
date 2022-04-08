@@ -2,9 +2,9 @@ import { StyleSheet, Text, View} from 'react-native'
 import { AuthContext } from '../AuthContext'
 import React from 'react'
 import { Appbar, TextInput, Button } from 'react-native-paper'
-import axios from 'axios'
-import {SERVER_URL} from '@env'
+import axios from '../axios/axios'
 import {checkConnection} from '../axios/functions'
+
 
 export default function Login({navigation}) {
   const Context = React.useContext(AuthContext)
@@ -14,7 +14,7 @@ export default function Login({navigation}) {
   const login = () => {
     checkConnection(async () => {
       try {
-        const res = await axios.post(SERVER_URL+'/api/login', {
+        const res = await axios.post('/api/login', {
           email: userName,
           password: password
         })

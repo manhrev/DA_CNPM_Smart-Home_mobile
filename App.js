@@ -1,9 +1,7 @@
 import Navigator from './routes/drawer'
 import React from 'react'
 import { AuthContext } from './AuthContext'
-import axios from 'axios';
-import {SERVER_URL} from '@env'
-
+import axios from './axios/axios';
 
 
 const initialState = 0
@@ -27,13 +25,14 @@ export default function App() {
   
   const checkLogin = async () => {
     try {
-      const res = await axios.get(SERVER_URL+'/api/checkLogin')
+      const res = await axios.get('/api/checkLogin')
       if (res.data.loggedIn) {
         dispatch('login')
-        console.log("Logged in")
+        console.log(res.data)
         
       } else {
         dispatch('logout')
+        console.log(res.data)
         console.log("Not logged in")
        
       }

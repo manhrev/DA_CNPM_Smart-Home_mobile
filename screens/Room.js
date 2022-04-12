@@ -37,6 +37,15 @@ export default function Home({ route, navigation }) {
           });
         }}
       />
+
+      <Button
+        title="Gas Concentration"
+        onPress={() => {
+          navigation.navigate("GasCon", {
+            Device: "Gas Concentration",
+          });
+        }}
+      />
     </View>
   );
 }

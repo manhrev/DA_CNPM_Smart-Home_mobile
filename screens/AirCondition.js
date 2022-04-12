@@ -53,10 +53,12 @@ export default function AirCondition({ route, navigation }) {
           if (!onoff) {
             data = { value: "3" };
             updateStatus("led", data);
+            getStatus("led");
           }
         } else {
           if (onoff) {
             updateStatus("led", data);
+            getStatus("led");
           }
         }
       }
@@ -97,7 +99,7 @@ export default function AirCondition({ route, navigation }) {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
-        "X-AIO-Key": "aio_BQuv95C7h43QrR5cvwaOq5UcBkvR",
+        "X-AIO-Key": "aio_vBMA67xXyhjseDFIkOCPODXrIyR0",
       },
       body: JSON.stringify(data),
     })
@@ -109,10 +111,14 @@ export default function AirCondition({ route, navigation }) {
   };
 
   const Context = React.useContext(AuthContext);
-  getTemperate();
-  getStatus("led");
-  getStatus("auto");
-  console.log("first");
+  // getTemperate();
+
+  useEffect(() => {
+    getTemperate();
+    getStatus("led");
+    getStatus("auto");
+  }, []);
+
   useEffect(() => {
     const fetchTem = setInterval(() => {
       getTemperate();

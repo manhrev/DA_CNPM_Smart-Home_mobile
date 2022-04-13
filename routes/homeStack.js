@@ -4,6 +4,7 @@ import Room from "../screens/Room";
 import Device from "../screens/Device";
 import AirCondition from "../screens/AirCondition";
 import GasCon from "../screens/GasCon";
+import Light from "../screens/Light";
 const Stack = createNativeStackNavigator();
 
 export default function HomeStack() {
@@ -14,6 +15,7 @@ export default function HomeStack() {
       <Stack.Screen name="AirCondition" component={AirCondition} />
       <Stack.Screen name="GasCon" component={GasCon} />
       <Stack.Screen name="Device" component={Device} />
+      <Stack.Screen name="Light" component={Light} />
     </Stack.Navigator>
   );
 }

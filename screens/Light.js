@@ -146,10 +146,9 @@ import {
           <View style={[{}, styles.imageAir]}>
             <Image source={require("../assets/air-condition.png")} />
           </View>
-          <Text style={[{}, styles.temperate]}> {data} &#8451; </Text>
   
           <View style={styles.manualHandle}>
-            <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>ON</Text>
+            <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>OFF</Text>
             {/* On Off*/}
             <View>
               <Switch
@@ -165,13 +164,13 @@ import {
                 disabled={auto}
               />
             </View>
-            <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>OFF</Text>
+            <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>ON</Text>
           </View>
   
           {/*Auto**/}
           <Text>Auto</Text>
           <View style={styles.manualHandle}>
-            <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>ON</Text>
+            <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>OFF</Text>
             {/* On Off**/}
             <View>
               <Switch
@@ -186,8 +185,23 @@ import {
                 }}
               />
             </View>
-            <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>OFF</Text>
+            <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>ON</Text>
           </View>
+
+          {/* <View style={styles.containerAir}> 
+            <View style={styles.manualHandle}>
+                <Text>Time On</Text>
+                <Input></Input>
+                <Text>h</Text>
+                <Input></Input>
+            </View>
+            <View style={styles.manualHandle}>
+                <Text>Time Off</Text>
+                <Input></Input>
+                <Text>h</Text>
+                <Input></Input>
+            </View>
+          </View> */}
         </View>
       </View>
     );

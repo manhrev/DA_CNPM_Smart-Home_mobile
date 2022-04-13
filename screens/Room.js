@@ -13,10 +13,10 @@ export default function Home({ route, navigation }) {
       </Appbar.Header>
 
       <Button
-        title="Device1"
+        title="Light"
         onPress={() => {
-          navigation.navigate("Device", {
-            Device: 1,
+          navigation.navigate("Light", {
+            Device: "Light",
           });
         }}
       />

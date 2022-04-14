@@ -8,8 +8,10 @@ export default function Home({ navigation }) {
         <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
         <Appbar.Content title="Home" />
       </Appbar.Header>
-      <ScrollView style={{ flex: 1, paddingTop: 20 }}>
-          <View style={{ width: '95%', alignSelf: "center"}}>
+      <ScrollView style={{ flex: 1}}>
+          <View style={{ width: '98%', alignSelf: "center"}}>
+            
+            <Text style={{fontSize: 26, marginLeft: 3,marginVertical: 10, fontWeight: 'bold', color: "#6200ee"}}>Rooms</Text>
 
             <TouchableNativeFeedback
               onPress={() => {
@@ -23,7 +25,7 @@ export default function Home({ navigation }) {
                 <Card.Cover source={require("../assets/livingroom.jpg")} />
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
-                      <View style={{ flex: 1 }}><Title style={{ color: 'dodgerblue' }}>Livingroom</Title></View>
+                      <View style={{ flex: 1 }}><Title style={{ color: '#6200ee' }}>Livingroom</Title></View>
                       <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: "center" }}><Text>4 devices</Text></View>
                     </View>
                   </Card.Content>
@@ -41,7 +43,7 @@ export default function Home({ navigation }) {
                 <Card.Cover source={require("../assets/bathroom.jpg")} />
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
-                      <View style={{ flex: 1 }}><Title style={{ color: 'dodgerblue' }}>Bathroom</Title></View>
+                      <View style={{ flex: 1 }}><Title style={{ color: '#6200ee' }}>Bathroom</Title></View>
                       <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: "center" }}><Text>4 devices</Text></View>
                     </View>
                   </Card.Content>
@@ -59,7 +61,7 @@ export default function Home({ navigation }) {
                 <Card.Cover source={require("../assets/bedroom.jpg")} />
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
-                      <View style={{ flex: 1 }}><Title style={{ color: 'dodgerblue' }}>Bedroom</Title></View>
+                      <View style={{ flex: 1 }}><Title style={{ color: '#6200ee' }}>Bedroom</Title></View>
                       <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: "center" }}><Text>4 devices</Text></View>
                     </View>
                   </Card.Content>
@@ -77,7 +79,7 @@ export default function Home({ navigation }) {
                 <Card.Cover source={require("../assets/kitchen.jpg")} />
                   <Card.Content>
                     <View style={{ flexDirection: 'row' }}>
-                      <View style={{ flex: 1 }}><Title style={{ color: 'dodgerblue' }}>Kitchen</Title></View>
+                      <View style={{ flex: 1 }}><Title style={{ color: '#6200ee' }}>Kitchen</Title></View>
                       <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: "center" }}><Text>4 devices</Text></View>
                     </View>
                   </Card.Content>
@@ -85,24 +87,11 @@ export default function Home({ navigation }) {
             </TouchableNativeFeedback>
 
           </View>
-          <View style={{height: 20}}></View>
+
+
+
+          
       </ScrollView>
-      {/* <Button
-        title="Room1"
-        onPress={() => {
-          navigation.navigate("Room", {
-            Room: 1,
-          });
-        }}
-      />
-      <Button
-        title="Room2"
-        onPress={() => {
-          navigation.navigate("Room", {
-            Room: 2,
-          });
-        }}
-      /> */}
     </View>
   );
 }

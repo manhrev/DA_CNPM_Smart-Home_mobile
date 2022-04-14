@@ -27,10 +27,18 @@ export default function DrawerNav() {
                         }}
                     />
                 }
-                {(Context.loginState  == 1) &&
+                {(Context.loginState  == 2) &&
                     <>
                         <Drawer.Screen name="Home stack" component={HomeStack} />
                         <Drawer.Screen name="Management stack" component={ManagementStack} />
+                        <Drawer.Screen name="Notification stack" component={NotificationStack} />
+                        <Drawer.Screen name="Logout stack" component={LogoutStack} />
+                    </>
+                    
+                }
+                {(Context.loginState  == 1) &&
+                    <>
+                        <Drawer.Screen name="Home stack" component={HomeStack} />
                         <Drawer.Screen name="Notification stack" component={NotificationStack} />
                         <Drawer.Screen name="Logout stack" component={LogoutStack} />
                     </>

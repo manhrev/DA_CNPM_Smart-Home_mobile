@@ -2,7 +2,7 @@ import Navigator from './routes/drawer'
 import React from 'react'
 import { AuthContext } from './AuthContext'
 import axios from './axios/axios';
-
+import Storage from './helpers/storage/storage'
 
 const initialState = 0
 const reducer = (state, action) => {
@@ -25,9 +25,19 @@ export default function App() {
   
   const checkLogin = async () => {
     try {
+      const role = await Storage.getItem("role");
       const res = await axios.get('/api/checkLogin')
       if (res.data.loggedIn) {
-        dispatch('login')
+        if (role) {
+          if (role.value == 'admin') {
+            dispatch('adminLogin')
+          } else {
+            dispatch('login')
+          }
+        } else {
+          dispatch('login')
+        }
+        
         console.log(res.data)
         
       } else {

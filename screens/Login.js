@@ -4,6 +4,7 @@ import React from "react";
 import { Appbar, TextInput, Button } from "react-native-paper";
 import axios from "../axios/axios";
 import { checkConnection } from "../axios/functions";
+import Storage from '../helpers/storage/storage'
 
 export default function Login({ navigation }) {
   const Context = React.useContext(AuthContext);
@@ -18,7 +19,13 @@ export default function Login({ navigation }) {
           password: password,
         });
         alert("Login successfully");
-        Context.loginDispatch("login");
+        if (res.data.role == "admin") {
+          await Storage.setItem("role", {value: 'admin'});
+          Context.loginDispatch("adminLogin");
+        } else {
+          await Storage.setItem("role", {value: 'normal'});
+          Context.loginDispatch("login");
+        }
       } catch (error) {
         alert("Wrong username or password!");
         console.log(error);

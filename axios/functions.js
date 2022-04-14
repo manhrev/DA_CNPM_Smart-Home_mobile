@@ -1,10 +1,16 @@
 import axios from "./axios";
-
+import Storage from "../helpers/storage/storage";
 export async function checkLogin(context, cb) {
     try {
+        const role = await Storage.getItem('role')
         const res = await axios.get("/api/checkLogin");
         if (res.data.loggedIn) {
-            context.loginDispatch("login");
+            if (role.value == "normal") {
+                context.loginDispatch("login");
+            } else {
+                context.loginDispatch("adminLogin");
+            }
+            
             cb();
         } else {
             context.loginDispatch("logout");

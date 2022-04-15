@@ -38,12 +38,12 @@ export default function App() {
           dispatch('login')
         }
         
-        console.log(res.data)
+        // console.log(res.data)
         
       } else {
         dispatch('logout')
-        console.log(res.data)
-        console.log("Not logged in")
+        // console.log(res.data)
+        // console.log("Not logged in")
        
       }
 

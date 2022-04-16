@@ -13,6 +13,10 @@ export default function Login({ navigation }) {
 
   const login = () => {
     checkConnection(async () => {
+      if (userName == "" || password == "") {
+        alert("Please input username and password!")
+        return
+      }
       try {
         const res = await axios.post("/api/login", {
           email: userName,

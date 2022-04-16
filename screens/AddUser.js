@@ -18,7 +18,10 @@ export default function AddUser({ route, navigation }) {
         else setRole('normal')
       };
     const createUser = async () => {
-        
+        if (userName == "" || password == "") {
+            alert("Please input username and password!")
+            return
+        }
         try {
             const res = await axios.post('/api/createUser', {
                 role: role,

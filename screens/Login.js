@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AuthContext } from "../AuthContext";
 import React from "react";
-import { Appbar, TextInput, Button } from "react-native-paper";
+import { TextInput, Button } from "react-native-paper";
 import axios from "../axios/axios";
 import { checkConnection } from "../axios/functions";
 import Storage from '../helpers/storage/storage'
@@ -18,7 +18,7 @@ export default function Login({ navigation }) {
           email: userName,
           password: password,
         });
-        alert("Login successfully");
+        alert("Logged in");
         if (res.data.role == "admin") {
           await Storage.setItem("role", {value: 'admin'});
           Context.loginDispatch("adminLogin");

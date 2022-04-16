@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { AuthContext } from '../AuthContext'
-import { Appbar } from 'react-native-paper';
+import { Appbar, Card, Title, Paragraph, Button } from 'react-native-paper';
 import React from 'react'
 import  axios from '../axios/axios'
 import { checkConnection } from '../axios/functions';
@@ -15,7 +15,7 @@ export default function Logout({navigation}) {
           const res = await axios.get('/api/logout')
           await Storage.removeItem('role')
           Context.loginDispatch('logout')
-          alert("Logout success")
+          alert("Logged out")
       }
       catch (error) {
           console.log(error.data)
@@ -31,8 +31,15 @@ export default function Logout({navigation}) {
         <Appbar.Content title="Logout" />
       </Appbar.Header>
 
-      <Button title="Logout now" onPress={logout}/>
-
+      <View style={{ width: '90%', alignSelf: "center", marginTop: 30}}>
+      <Card style={styles.card}>
+        <Title style={{width: "95%", alignSelf: "center"}}>Alert</Title>
+        <Card.Content>
+          <Paragraph>You are attempting to logout of SmartHome app. Do you really want to log out?</Paragraph>
+          <Button mode="outlined" style={{ alignSelf: 'center', marginTop: 10 }} onPress={ logout}>Logout now</Button>
+        </Card.Content>
+      </Card>
+      </View>
     </View>
   );
 }

@@ -31,16 +31,18 @@ export default function GasConcentration({ route, navigation }) {
     }
   };
 
-  const Context = React.useContext(AuthContext);
+  // const Context = React.useContext(AuthContext);
+  // useEffect(() => {
+  //   getTemperate();
+  // }, []);
   useEffect(() => {
+    //add
     getTemperate();
-  }, []);
-  useEffect(() => {
     const fetchTem = setInterval(() => {
       getTemperate();
     }, 5000);
     return () => clearInterval(fetchTem);
-  });
+  }, []);
 
   return (
     <View style={styles.container}>

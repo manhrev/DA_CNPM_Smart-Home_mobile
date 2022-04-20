@@ -54,6 +54,7 @@ export default function Notification({navigation}) {
                 const showDialog = () => setVisible(true);
                 const hideDialog = () => setVisible(false);
                 const [notyID, setNotyID] = React.useState(props.notification._id)
+                const date = new Date(props.notification.createdAt)
                 const removeNotification = () => {
                   checkLogin(Context, async () => {
                     try {
@@ -79,7 +80,7 @@ export default function Notification({navigation}) {
                       <Card.Content>
                         <View style={{ flexDirection: 'row' }}>
                           <View style={{ flex: 1 }}><Title style={{ color: 'dodgerblue' }}>{notification.title}</Title></View>
-                          <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: "center" }}><Text>{notification.createdAt }</Text></View>
+                          <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: "center" }}><Text>{date.getDate()+'/'+(date.getMonth()+1)+'/'+date.getFullYear()+' at '+date.getHours()+':'+date.getMinutes() }</Text></View>
                         </View>
                         <Paragraph>
                         {notification.content}
@@ -130,12 +131,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
-        width: 0,
-        height: 2,
+      width: 0,
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
 
     elevation: 5,
-}
+  }
 });

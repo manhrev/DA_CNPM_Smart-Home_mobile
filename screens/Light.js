@@ -23,7 +23,7 @@ import {
       if (onoff) {
         data = { value: "2" };
         updateStatus("led", data);
-      } else {
+      } else {  
         updateStatus("led", data);
       }
     };
@@ -143,8 +143,11 @@ import {
           <Appbar.Content title={devicename} />
         </Appbar.Header>
         <View style={styles.containerAir}>
-          <View style={[{}, styles.imageAir]}>
-            <Image source={require("../assets/air-condition.png")} />
+          <View style={[{}, styles.imageOff]}>
+            <Image source={require("../assets/light.png")} />
+          </View>
+          <View style={[{}, styles.imageOn]}>
+            <Image source={require("../assets/light1.png")} />
           </View>
   
           <View style={styles.manualHandle}>
@@ -188,20 +191,6 @@ import {
             <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>ON</Text>
           </View>
 
-          {/* <View style={styles.containerAir}> 
-            <View style={styles.manualHandle}>
-                <Text>Time On</Text>
-                <Input></Input>
-                <Text>h</Text>
-                <Input></Input>
-            </View>
-            <View style={styles.manualHandle}>
-                <Text>Time Off</Text>
-                <Input></Input>
-                <Text>h</Text>
-                <Input></Input>
-            </View>
-          </View> */}
         </View>
       </View>
     );
@@ -214,6 +203,7 @@ import {
       flex: 1,
       alignItems: "center",
     },
+    
     manualHandle: {
       flex: 1,
       flexDirection: "row",
@@ -223,6 +213,14 @@ import {
       fontWeight: "600",
     },
     imageAir: {
+      paddingTop: 40,
+    },
+    imageOn: {
+      paddingTop: 40,
+      display: "none",
+
+    },
+    imageOff: {
       paddingTop: 40,
     },
     temperate: {

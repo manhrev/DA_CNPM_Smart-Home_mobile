@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 export default function NotificationStack() {
     return (
         <Stack.Navigator screenOptions={{headerShown: false}}>
-            <Stack.Screen name="Logout" component={Logout} />
+            <Stack.Screen name="Logout page" component={Logout} />
 
             
         </Stack.Navigator>

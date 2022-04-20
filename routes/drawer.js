@@ -4,7 +4,7 @@ import NotificationStack from "./notificationStack";
 import IndexStack from "./indexStack";
 import LogoutStack from "./logoutStack"
 import ManagementStack from "./managementStack";
-
+import ReportStack from "./reportStack";
 import { NavigationContainer } from "@react-navigation/native";
 import React from 'react';
 import { AuthContext } from '../AuthContext'
@@ -27,12 +27,22 @@ export default function DrawerNav() {
                         }}
                     />
                 }
+                {(Context.loginState  == 2) &&
+                    <>
+                        <Drawer.Screen name="Home page" component={HomeStack} />
+                        <Drawer.Screen name="Quick report" component={ReportStack} />
+                        <Drawer.Screen name="Management" component={ManagementStack} />
+                        <Drawer.Screen name="Notification" component={NotificationStack} />
+                        <Drawer.Screen name="Logout" component={LogoutStack} />
+                    </>
+                    
+                }
                 {(Context.loginState  == 1) &&
                     <>
-                        <Drawer.Screen name="Home stack" component={HomeStack} />
-                        <Drawer.Screen name="Management stack" component={ManagementStack} />
-                        <Drawer.Screen name="Notification stack" component={NotificationStack} />
-                        <Drawer.Screen name="Logout stack" component={LogoutStack} />
+                        <Drawer.Screen name="Home" component={HomeStack} />
+                        <Drawer.Screen name="Quick report" component={ReportStack} />
+                        <Drawer.Screen name="Notification" component={NotificationStack} />
+                        <Drawer.Screen name="Logout" component={LogoutStack} />
                     </>
                     
                 }

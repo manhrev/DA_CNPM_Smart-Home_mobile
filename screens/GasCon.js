@@ -17,6 +17,7 @@ export default function GasConcentration({ route, navigation }) {
   const devicename = route.params.Device;
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [loanding, setLoading] = useState(false);
 
   const getTemperate = async () => {
     try {
@@ -32,16 +33,18 @@ export default function GasConcentration({ route, navigation }) {
     }
   };
 
-  const Context = React.useContext(AuthContext);
+  // const Context = React.useContext(AuthContext);
+  // useEffect(() => {
+  //   getTemperate();
+  // }, []);
   useEffect(() => {
+    //add
     getTemperate();
-  }, []);
-  useEffect(() => {
     const fetchTem = setInterval(() => {
       getTemperate();
     }, 5000);
     return () => clearInterval(fetchTem);
-  });
+  }, []);
 
   return (
     <View style={styles.container}>

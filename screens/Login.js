@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AuthContext } from "../AuthContext";
 import React from "react";
-import { Appbar, TextInput, Button } from "react-native-paper";
+import { TextInput, Button } from "react-native-paper";
 import axios from "../axios/axios";
 import { checkConnection } from "../axios/functions";
+import Storage from '../helpers/storage/storage'
 
 export default function Login({ navigation }) {
   const Context = React.useContext(AuthContext);
@@ -12,13 +13,23 @@ export default function Login({ navigation }) {
 
   const login = () => {
     checkConnection(async () => {
+      if (userName == "" || password == "") {
+        alert("Please input username and password!")
+        return
+      }
       try {
         const res = await axios.post("/api/login", {
           email: userName,
           password: password,
         });
-        alert("Login successfully");
-        Context.loginDispatch("login");
+        alert("Logged in");
+        if (res.data.role == "admin") {
+          await Storage.setItem("role", {value: 'admin'});
+          Context.loginDispatch("adminLogin");
+        } else {
+          await Storage.setItem("role", {value: 'normal'});
+          Context.loginDispatch("login");
+        }
       } catch (error) {
         alert("Wrong username or password!");
         console.log(error);

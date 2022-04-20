@@ -52,13 +52,13 @@ export default function AirCondition({ route, navigation }) {
         if (json[0].value > 28) {
           if (!onoff) {
             data = { value: "3" };
+            setOnoff(true);
             updateStatus("led", data);
-            getStatus("led");
           }
         } else {
           if (onoff) {
+            setOnoff(false);
             updateStatus("led", data);
-            getStatus("led");
           }
         }
       }
@@ -99,7 +99,7 @@ export default function AirCondition({ route, navigation }) {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
-        "X-AIO-Key": "aio_vBMA67xXyhjseDFIkOCPODXrIyR0",
+        "X-AIO-Key": "aio_musb22K0lgZVHNzGUAXhrjqHbplI",
       },
       body: JSON.stringify(data),
     })

@@ -17,7 +17,6 @@ export default function GasConcentration({ route, navigation }) {
   const devicename = route.params.Device;
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [loanding, setLoading] = useState(false);
 
   const getTemperate = async () => {
     try {

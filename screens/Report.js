@@ -8,7 +8,8 @@ import { AuthContext } from '../AuthContext'
 
 
 const dayInWeek = ["CN","T2", "T3", "T4", "T5", "T6", "T7"]
-const thisDay = new Date()
+const thisDay = new Date(Date.now())
+
 function getLabels() {
     let day = thisDay.getDay()
     let labels = []
@@ -20,13 +21,26 @@ function getLabels() {
     }
     return labels
 }
+
+//bug 
 function processHumidityData(data) {
+    let preDay = new Date(data[0].createdAt)
+
+    let diff = thisDay.getDate() - preDay.getDate()
+    let labels = getLabels()
     let dat = []
     data.forEach(val => {
         dat.unshift(val.humidity)
     });
+    let j = 6
+    for (let i=0; i<diff; i++) {
+        dat[j] = 0;
+        if (j!=6)
+        labels[j] = 'nodata';
+        j --;
+    }
     return {
-        labels: getLabels(),
+        labels: labels,
         datasets: [
             {data: dat}
         ]
@@ -34,12 +48,22 @@ function processHumidityData(data) {
     }
 }
 function processTemperatureDate(data) {
+    let preDay = new Date(data[0].createdAt)
+    let diff = thisDay.getDate() - preDay.getDate()
     let dat = []
     data.forEach(val => {
         dat.unshift(val.temperature)
     });
+    let labels = getLabels()
+    let j = 6
+    for (let i=0; i<diff; i++) {
+        dat[j] = 0;
+        if (j!=6)
+        labels[j] = 'nodata';
+        j --;
+    }
     return {
-        labels: getLabels(),
+        labels: labels,
         datasets: [
             {data: dat}
         ]

@@ -115,9 +115,14 @@ export default function AirCondition({ route, navigation }) {
   // getTemperate();
 
   useEffect(() => {
+    let isMounted = true;
     getTemperate();
     getStatus("led");
     getStatus("auto");
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {

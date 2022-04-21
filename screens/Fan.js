@@ -44,7 +44,7 @@ export default function Fan({ route, navigation }) {
   const getTemperate = async () => {
     try {
       const response = await fetch(
-        "https://io.adafruit.com/api/v2/DAFS/feeds/fan/data"
+        "https://io.adafruit.com/api/v2/DAFS/feeds/temp/data"
       );
       const json = await response.json();
       setData(json[0].value);

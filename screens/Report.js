@@ -33,12 +33,12 @@ function processHumidityData(data) {
         dat.unshift(val.humidity)
     });
     let j = 6
-    for (let i=0; i<diff; i++) {
-        dat[j] = 0;
-        if (j!=6)
-        labels[j] = 'nodata';
-        j --;
-    }
+    // for (let i=0; i<diff; i++) {
+    //     dat[j] = 0;
+    //     if (j!=6)
+    //     labels[j] = 'nodata';
+    //     j --;
+    // }
     return {
         labels: labels,
         datasets: [
@@ -56,12 +56,12 @@ function processTemperatureDate(data) {
     });
     let labels = getLabels()
     let j = 6
-    for (let i=0; i<diff; i++) {
-        dat[j] = 0;
-        if (j!=6)
-        labels[j] = 'nodata';
-        j --;
-    }
+    // for (let i=0; i<diff; i++) {
+    //     dat[j] = 0;
+    //     if (j!=6)
+    //     labels[j] = 'nodata';
+    //     j --;
+    // }
     return {
         labels: labels,
         datasets: [
@@ -96,7 +96,7 @@ export default function Home({ navigation }) {
                 <Appbar.Action icon="menu" onPress={() => navigation.openDrawer()} />
                 <Appbar.Content title="Report" />
             </Appbar.Header>
-            {data &&
+            {data.length >= 7 &&
             <ScrollView style={{ flex: 1 }}>
                 <View style={{ width: '96%', alignSelf: "center" }}>
                     <Text style={{ fontSize: 22, marginLeft: 3, marginTop: 10, fontWeight: 'bold', color: "#6200ee" }}>Average temperature</Text>

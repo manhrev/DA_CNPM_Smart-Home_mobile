@@ -12,10 +12,11 @@ import { AuthContext } from "../AuthContext";
 import { Appbar } from "react-native-paper";
 import React, { useEffect, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+const Separator = () => <View style={styles.separator} />;
 export default function GasConcentration({ route, navigation }) {
   const devicename = route.params.Device;
+  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [loanding, setLoading] = useState(false);
 
   const getTemperate = async () => {
     try {
@@ -60,6 +61,7 @@ export default function GasConcentration({ route, navigation }) {
         <Text style={styles.label}>Gas Concentration:</Text>
         <Text style={styles.valueGas}>{data} ppm</Text>
       </View>
+      <Separator />
     </View>
   );
 }
@@ -76,10 +78,10 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   label: {
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: "600",
   },
   valueGas: {
-    fontSize: 15,
+    fontSize: 30,
   },
 });

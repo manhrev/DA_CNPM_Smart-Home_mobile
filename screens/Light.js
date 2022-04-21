@@ -135,10 +135,10 @@ export default function AirCondition({ route, navigation }) {
       <View style={styles.containerAir}>
         <View style={styles.liOn}>
           {!onoff &&
-            <Image source={require("../assets/light.png")} />
+            <Image style={{resizeMode: "cover",height: 170, width: 170}} source={require("../assets/light.png")} />
           }
           {onoff &&
-            <Image source={require("../assets/light1.png")} />
+            <Image style={{resizeMode: "cover",height: 170, width: 170}} source={require("../assets/light1.png")} />
           }
         </View>
         {/* <View style={[{}, onoff?styles.liOff:styles.liOn]}>
@@ -210,6 +210,7 @@ const styles = StyleSheet.create({
   },
   liOn: {
     paddingTop: 40,
+  
   },
   liOff: {
     paddingTop: 40,

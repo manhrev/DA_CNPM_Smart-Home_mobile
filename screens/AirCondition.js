@@ -155,7 +155,7 @@ export default function AirCondition({ route, navigation }) {
         <Text style={[{}, styles.temperate]}> {data} &#8451; </Text>
 
         <View style={styles.manualHandle}>
-          <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>ON</Text>
+          <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>OFF</Text>
           {/* On Off*/}
           <View>
             <Switch
@@ -171,13 +171,13 @@ export default function AirCondition({ route, navigation }) {
               disabled={auto}
             />
           </View>
-          <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>OFF</Text>
+          <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>ON</Text>
         </View>
 
         {/*Auto**/}
         <Text>Auto</Text>
         <View style={styles.manualHandle}>
-          <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>ON</Text>
+          <Text style={[{ paddingRight: 25 }, styles.textOnOff]}>OFF</Text>
           {/* On Off**/}
           <View>
             <Switch
@@ -192,7 +192,7 @@ export default function AirCondition({ route, navigation }) {
               }}
             />
           </View>
-          <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>OFF</Text>
+          <Text style={[styles.textOnOff, { paddingLeft: 25 }]}>ON</Text>
         </View>
       </View>
     </View>

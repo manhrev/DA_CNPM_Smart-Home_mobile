@@ -22,8 +22,13 @@ import {
       var data = { value: "3" };
       if (onoff) {
         data = { value: "2" };
+        
+        // styles.imageOn.display = "none";
+        // styles.imageOff.display = "block";
         updateStatus("led", data);
       } else {  
+        // styles.imageOn.display = "block";
+        // styles.imageOff.display = "none";
         updateStatus("led", data);
       }
     };
@@ -76,8 +81,24 @@ import {
         const json = await response.json();
         if (name == "led") {
           if (json[0].value == 3) {
+            // const newStyle = StyleSheet.create({
+            //   imageOn: {
+            //     display: "flex",
+            //   },
+            //   imageOff: {
+            //     display: "none",
+            //   },
+            // });
             setOnoff(true);
           } else {
+            // const newStyle = StyleSheet.create({
+            //   imageOn: {
+            //     display: "none",
+            //   },
+            //   imageOff: {
+            //     display: "flex",
+            //   },
+            // });
             setOnoff(false);
           }
         } else {
@@ -143,10 +164,10 @@ import {
           <Appbar.Content title={devicename} />
         </Appbar.Header>
         <View style={styles.containerAir}>
-          <View style={[{}, styles.imageOff]}>
+          <View style={onoff?styles.imageOn:styles.imageOff}>
             <Image source={require("../assets/light.png")} />
           </View>
-          <View style={[{}, styles.imageOn]}>
+          <View style={onoff?styles.imageOn:styles.imageOff}>
             <Image source={require("../assets/light1.png")} />
           </View>
   
@@ -217,11 +238,13 @@ import {
     },
     imageOn: {
       paddingTop: 40,
-      display: "none",
+      display: "flex",
 
     },
     imageOff: {
       paddingTop: 40,
+      display: "none",
+
     },
     temperate: {
       fontSize: 30,

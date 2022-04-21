@@ -96,6 +96,7 @@ export default function AirCondition({ route, navigation }) {
   };
 
   const updateStatus = async (name, data) => {
+    console.log(data);
     fetch(`https://io.adafruit.com/api/v2/DAFS/feeds/${name}/data`, {
       method: "POST", // or 'PUT'
       headers: {

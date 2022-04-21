@@ -267,7 +267,19 @@ export default function AirCondition({ route, navigation }) {
   };
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
+  const getTemperate = async () => {
+    try {
+      const response = await fetch(
+        "https://io.adafruit.com/api/v2/DAFS/feeds/gas/data"
+      );
+      const json = await response.json();
+      setData(json[0].value);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const getStatus = async (name) => {
     try {
       const response = await fetch(
@@ -348,10 +360,11 @@ export default function AirCondition({ route, navigation }) {
         <Appbar.Content title={devicename} />
       </Appbar.Header>
       <View style={styles.containerAir}>
-        <View style={[{},styles.liOn]}>
-          if(onoff){
+        <View style={styles.liOn}>
+          {onoff &&
             <Image source={require("../assets/light.png")} />
-          }else{
+          }
+          {!onoff &&
             <Image source={require("../assets/light1.png")} />
           }
         </View>

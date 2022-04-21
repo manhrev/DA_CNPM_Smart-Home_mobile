@@ -12,6 +12,7 @@ import { AuthContext } from "../AuthContext";
 import { Appbar } from "react-native-paper";
 import React, { useEffect, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import { AIO_KEY } from "@env";
 export default function Fan({ route, navigation }) {
   const devicename = route.params.Device;
   const [onoff, setOnoff] = useState(false);
@@ -99,7 +100,7 @@ export default function Fan({ route, navigation }) {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
-        "X-AIO-Key": "aio_okUa46BtMHd0wnbIbWlLdKDKMC50",
+        "X-AIO-Key": `${AIO_KEY}`,
       },
       body: JSON.stringify(data),
     })
